@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="true" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Incident" representedClassName="Incident" syncable="YES">
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="medications" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Medication" inverseName="incidents" inverseEntity="Medication"/>
+        <relationship name="symptoms" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Symptom" inverseName="incidents" inverseEntity="Symptom"/>
+        <relationship name="triggers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Trigger" inverseName="incidents" inverseEntity="Trigger"/>
+    </entity>
+    <entity name="Medication" representedClassName="Medication" syncable="YES">
+        <attribute name="asNeeded" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="discontinued" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="instructions" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
+        <attribute name="lastFilled" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String" defaultValueString="" allowsCloudEncryption="YES"/>
+        <attribute name="prescriber" optional="YES" attributeType="String"/>
+        <attribute name="prescriptionNumber" optional="YES" attributeType="String"/>
+        <attribute name="priorAuthCode" optional="YES" attributeType="String"/>
+        <attribute name="refills" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="started" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="incidents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Incident" inverseName="medications" inverseEntity="Incident"/>
+    </entity>
+    <entity name="Symptom" representedClassName="Symptom" syncable="YES">
+        <attribute name="name" attributeType="String" defaultValueString="Symptom" allowsCloudEncryption="YES"/>
+        <relationship name="incidents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Incident" inverseName="symptoms" inverseEntity="Incident"/>
+    </entity>
+    <entity name="Trigger" representedClassName="Trigger" syncable="YES">
+        <attribute name="name" attributeType="String" defaultValueString="Trigger" allowsCloudEncryption="YES"/>
+        <relationship name="incidents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Incident" inverseName="triggers" inverseEntity="Incident"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="Incident" positionX="-230.96142578125" positionY="-203.1000061035156" width="128" height="103"/>
+        <element name="Medication" positionX="-353.17822265625" positionY="53.727294921875" width="128" height="28"/>
+        <element name="Symptom" positionX="165.5123291015625" positionY="-105.3290405273438" width="128" height="73"/>
+        <element name="Trigger" positionX="-168.8795776367188" positionY="129.2958374023438" width="128" height="73"/>
     </elements>
 </model>
